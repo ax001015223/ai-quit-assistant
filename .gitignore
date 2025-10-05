@@ -32,6 +32,9 @@ out/
 .env.test.local
 .env.production.local
 
+# API配置文件（包含敏感信息）
+js/config.js
+
 # 缓存
 .cache/
 .temp/

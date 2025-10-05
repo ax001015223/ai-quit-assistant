@@ -21,7 +21,7 @@
 - 连续天数统计
 - 里程碑激励(1天、7天、30天、90天、365天)
 - 可视化日历展示
-
+cl
 ### 4. 记录与分析
 - 每日情绪记录(1-10分)
 - 戒断反应追踪
@@ -34,6 +34,15 @@
 - 解答戒除过程中的疑问
 
 ## 使用方法
+
+### 0. 配置API密钥 (首次使用必须)
+1. 复制 `js/config.example.js` 为 `js/config.js`
+2. 编辑 `js/config.js`，将 `YOUR_API_KEY_HERE` 替换为你的豆包API密钥
+3. 保存文件
+
+**获取API密钥**: 访问 [豆包开放平台](https://console.volcengine.com/ark) 注册并获取API密钥
+
+⚠️ **安全提醒**: `js/config.js` 包含敏感信息，请勿分享或提交到版本控制系统
 
 ### 1. 打开应用
 直接在浏览器中打开 `index.html` 文件
@@ -76,6 +85,8 @@
 ├── css/
 │   └── style.css          # 样式文件
 ├── js/
+│   ├── config.js          # API配置 (需要自行创建，不提交到git)
+│   ├── config.example.js  # API配置模板
 │   ├── ai.js              # AI API封装
 │   ├── assessment.js      # 评估逻辑
 │   ├── dashboard.js       # 主界面逻辑
@@ -89,10 +100,12 @@
 - 清除浏览器数据会丢失记录
 
 ### API配置
-AI API已配置在 `js/ai.js` 文件中:
-- API地址: https://ark.cn-beijing.volces.com/api/v3/chat/completions
-- 模型: doubao-1-5-lite-32k-250115
-- 如需更换API密钥,请修改 `js/ai.js` 中的 `apiKey` 字段
+1. 复制 `js/config.example.js` 为 `js/config.js`
+2. 在 `js/config.js` 中配置你的豆包API密钥
+3. API配置说明:
+   - API地址: https://ark.cn-beijing.volces.com/api/v3/chat/completions
+   - 模型: doubao-1-5-lite-32k-250115
+4. ⚠️ **`js/config.js` 已添加到 `.gitignore`，不会被提交到版本控制系统**
 
 ## 隐私保护
 

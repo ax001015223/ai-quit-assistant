@@ -1,8 +1,8 @@
 // AI API 调用封装
 const AI = {
-    apiUrl: 'https://ark.cn-beijing.volces.com/api/v3/chat/completions',
-    apiKey: '4d166798-c0b1-4f89-8b03-b15f74973b35',
-    model: 'doubao-1-5-lite-32k-250115',
+    apiUrl: API_CONFIG.apiUrl,
+    apiKey: API_CONFIG.apiKey,
+    model: API_CONFIG.model,
 
     // 调用豆包API
     async chat(messages, systemPrompt = '你是一位专业、温暖、有同理心的心理咨询师和成瘾戒除辅导专家。') {
