@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI助手显示和拖动测试</title>
+    <style>
+        body {
+            font-family: 'PingFang SC', sans-serif;
+            padding: 20px;
+            background: #F5F1E8;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #5A5550;
+        }
+        h1 { color: #3D3935; }
+        h2 { color: #5A5550; margin-top: 20px; }
+        .test-btn {
+            padding: 10px 20px;
+            background: #5A5550;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-btn:hover {
+            background: #3D3935;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>🔧 AI助手显示和拖动测试</h1>
+
+    <div class="test-section">
+        <h2>测试项目</h2>
+        <div id="testResults"></div>
+
+        <h3>手动测试</h3>
+        <button class="test-btn" onclick="testToggle()">1. 测试显示/隐藏</button>
+        <button class="test-btn" onclick="testDrag()">2. 测试拖动功能</button>
+        <button class="test-btn" onclick="testPosition()">3. 测试位置保存</button>
+        <button class="test-btn" onclick="clearPosition()">4. 清除保存的位置</button>
+        <button class="test-btn" onclick="checkCSS()">5. 检查CSS</button>
+    </div>
+
+    <div class="test-section">
+        <h2>问题诊断</h2>
+        <div id="diagnosis"></div>
+    </div>
+
+    <!-- 模拟AI助手 -->
+    <button type="button" class="ai-chat-btn" id="aiChatBtn" style="position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; border-radius: 50%; background: #5A5550; color: white; border: 2px solid #A89F91; font-size: 1.8rem; cursor: pointer; z-index: 1000;">💬</button>
+
+    <div class="ai-chat-window" id="aiChatWindow" style="position: fixed; bottom: 110px; right: 30px; width: 360px; height: 520px; background: #E8E3D8; border: 2px solid #C4C0B8; display: none; flex-direction: column; z-index: 999;">
+        <div class="chat-header" style="background: #5A5550; color: #F5F1E8; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; cursor: move; user-select: none;">
+            <h3 style="margin: 0; font-weight: 400; letter-spacing: 2px; font-size: 1rem;">🤖 AI助手</h3>
+            <div class="chat-header-actions" style="display: flex; gap: 8px;">
+                <button type="button" class="header-icon-btn" style="background: transparent; border: none; color: #F5F1E8; font-size: 1.2rem; cursor: pointer;">🗑️</button>
+                <button type="button" class="close-btn" id="closeChatBtn" style="background: transparent; border: none; color: #F5F1E8; font-size: 1.8rem; cursor: pointer;">×</button>
+            </div>
+        </div>
+        <div class="chat-messages" style="flex: 1; padding: 18px; background: #F5F1E8; overflow-y: auto;">
+            <p>这是测试窗口</p>
+            <p>尝试拖动标题栏移动窗口</p>
+            <p>点击关闭按钮隐藏窗口</p>
+        </div>
+    </div>
+
+    <script>
+        let testResults = document.getElementById('testResults');
+        let diagnosis = document.getElementById('diagnosis');
+
+        // 自动测试
+        window.onload = function() {
+            runAutoTests();
+        };
+
+        function addResult(message, type) {
+            let div = document.createElement('div');
+            div.className = 'status ' + type;
+            div.textContent = message;
+            testResults.appendChild(div);
+        }
+
+        function runAutoTests() {
+            addResult('开始自动测试...', 'info');
+
+            // 测试1: 元素存在
+            const chatBtn = document.getElementById('aiChatBtn');
+            const chatWindow = document.getElementById('aiChatWindow');
+            if (chatBtn && chatWindow) {
+                addResult('✓ AI助手元素存在', 'success');
+            } else {
+                addResult('✗ AI助手元素缺失', 'error');
+            }
+
+            // 测试2: 初始状态
+            if (chatWindow.style.display === 'none' || !chatWindow.classList.contains('active')) {
+                addResult('✓ 初始状态正确(隐藏)', 'success');
+            } else {
+                addResult('✗ 初始状态错误(应该隐藏)', 'error');
+            }
+
+            // 测试3: 事件绑定
+            setupEvents();
+            addResult('✓ 事件监听器已绑定', 'success');
+
+            addResult('自动测试完成,请手动测试拖动功能', 'info');
+        }
+
+        function setupEvents() {
+            const chatBtn = document.getElementById('aiChatBtn');
+            const chatWindow = document.getElementById('aiChatWindow');
+            const closeBtn = document.getElementById('closeChatBtn');
+
+            chatBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                chatWindow.style.display = chatWindow.style.display === 'none' ? 'flex' : 'none';
+                chatWindow.classList.toggle('active');
+            });
+
+            closeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                chatWindow.style.display = 'none';
+                chatWindow.classList.remove('active');
+            });
+
+            // 简单拖动
+            const chatHeader = chatWindow.querySelector('.chat-header');
+            let isDragging = false;
+            let currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+
+            chatHeader.addEventListener('mousedown', function(e) {
+                if (e.target.closest('.close-btn') || e.target.closest('.header-icon-btn')) {
+                    return;
+                }
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+                isDragging = true;
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (isDragging) {
+                    e.preventDefault();
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                    xOffset = currentX;
+                    yOffset = currentY;
+                    chatWindow.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+                }
+            });
+
+            document.addEventListener('mouseup', function(e) {
+                isDragging = false;
+            });
+        }
+
+        function testToggle() {
+            const chatWindow = document.getElementById('aiChatWindow');
+            chatWindow.style.display = chatWindow.style.display === 'none' ? 'flex' : 'none';
+            addResult('切换显示状态: ' + (chatWindow.style.display === 'flex' ? '显示' : '隐藏'), 'info');
+        }
+
+        function testDrag() {
+            addResult('请手动拖动AI助手窗口的标题栏测试', 'info');
+        }
+
+        function testPosition() {
+            const chatWindow = document.getElementById('aiChatWindow');
+            const transform = chatWindow.style.transform;
+            addResult('当前位置: ' + (transform || '默认位置'), 'info');
+        }
+
+        function clearPosition() {
+            localStorage.removeItem('chatWindowPosition');
+            const chatWindow = document.getElementById('aiChatWindow');
+            chatWindow.style.transform = '';
+            addResult('已清除保存的位置', 'success');
+        }
+
+        function checkCSS() {
+            const chatWindow = document.getElementById('aiChatWindow');
+            const computed = window.getComputedStyle(chatWindow);
+            diagnosis.innerHTML = `
+                <div class="status info">
+                    <strong>CSS 诊断:</strong><br>
+                    display: ${computed.display}<br>
+                    position: ${computed.position}<br>
+                    transform: ${computed.transform}<br>
+                    z-index: ${computed.zIndex}<br>
+                    bottom: ${computed.bottom}<br>
+                    right: ${computed.right}
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

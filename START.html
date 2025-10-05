@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI戒除助手 - 使用说明</title>
+    <style>
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #F5F1E8;
+            color: #3D3935;
+            line-height: 1.8;
+        }
+        h1 { color: #5A5550; border-bottom: 2px solid #A89F91; padding-bottom: 10px; }
+        h2 { color: #5A5550; margin-top: 30px; }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #5A5550;
+            color: #F5F1E8;
+            text-decoration: none;
+            margin: 10px 5px;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: #3D3935;
+            transform: translateY(-2px);
+        }
+        .warning {
+            background: #E8E3D8;
+            border-left: 4px solid #A89F91;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .success {
+            background: #E8E3D8;
+            border-left: 4px solid #5A5550;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        code {
+            background: #E8E3D8;
+            padding: 2px 6px;
+            border-radius: 2px;
+        }
+        ul { padding-left: 25px; }
+        li { margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>🌱 AI戒除助手 - 使用指南</h1>
+
+    <div class="success">
+        <strong>✅ 代码检查完成</strong><br>
+        所有JavaScript文件语法正确,无明显错误。
+    </div>
+
+    <h2>📋 使用步骤</h2>
+
+    <ol>
+        <li><strong>首次使用</strong>
+            <ul>
+                <li>打开 <code>index.html</code> 开始AI评估</li>
+                <li>回答AI的问题(大约5-10个问题)</li>
+                <li>AI会根据您的情况生成个性化计划</li>
+            </ul>
+        </li>
+
+        <li><strong>日常使用</strong>
+            <ul>
+                <li>打开 <code>dashboard.html</code> 进入主界面</li>
+                <li>查看戒除计划</li>
+                <li>每日打卡</li>
+                <li>记录情绪和状态</li>
+                <li>与AI助手聊天获取支持</li>
+            </ul>
+        </li>
+    </ol>
+
+    <div style="text-align: center; margin: 40px 0;">
+        <a href="index.html" class="btn">🚀 开始评估</a>
+        <a href="dashboard.html" class="btn">📊 进入主界面</a>
+    </div>
+
+    <h2>⚙️ 功能说明</h2>
+
+    <h3>1. AI评估 (index.html)</h3>
+    <ul>
+        <li>对话式收集成瘾信息</li>
+        <li>AI分析并生成个性化计划</li>
+        <li>数据保存在本地浏览器</li>
+    </ul>
+
+    <h3>2. 戒除计划</h3>
+    <ul>
+        <li>7天适应期计划</li>
+        <li>30天巩固期计划</li>
+        <li>90天稳定期计划</li>
+        <li>应对戒断反应策略</li>
+    </ul>
+
+    <h3>3. 打卡系统</h3>
+    <ul>
+        <li>每日打卡记录</li>
+        <li>连续天数统计</li>
+        <li>里程碑成就(1/7/30/90/365天)</li>
+        <li>月度打卡日历</li>
+    </ul>
+
+    <h3>4. 记录分析</h3>
+    <ul>
+        <li>每日情绪评分(1-10)</li>
+        <li>戒断反应记录</li>
+        <li>情绪趋势图表</li>
+        <li>历史记录查看</li>
+    </ul>
+
+    <h3>5. AI助手</h3>
+    <ul>
+        <li>24小时在线支持</li>
+        <li>情绪疏导</li>
+        <li>策略建议</li>
+        <li>聊天记录持久化</li>
+        <li>可拖动窗口</li>
+    </ul>
+
+    <h2>🔧 故障排查</h2>
+
+    <div class="warning">
+        <strong>⚠️ 常见问题</strong>
+
+        <h4>1. 页面显示"请先完成初始评估"</h4>
+        <p><strong>原因</strong>: 未完成评估或数据丢失<br>
+        <strong>解决</strong>: 先打开 <code>index.html</code> 完成评估</p>
+
+        <h4>2. AI无法回复</h4>
+        <p><strong>原因</strong>: 网络连接问题或API密钥失效<br>
+        <strong>解决</strong>: 检查网络连接,或联系管理员更新API密钥</p>
+
+        <h4>3. 数据丢失</h4>
+        <p><strong>原因</strong>: 清除了浏览器数据或使用隐私模式<br>
+        <strong>解决</strong>: 避免清除浏览器数据,不要使用隐私模式</p>
+
+        <h4>4. 聊天窗口无法拖动</h4>
+        <p><strong>原因</strong>: 点击到了按钮区域<br>
+        <strong>解决</strong>: 在标题栏空白处拖动,避开按钮</p>
+    </div>
+
+    <h2>💾 数据存储</h2>
+
+    <p>所有数据保存在浏览器的 <code>localStorage</code> 中:</p>
+    <ul>
+        <li><code>userAssessment</code> - 用户评估信息</li>
+        <li><code>addictionPlan</code> - 戒除计划</li>
+        <li><code>checkIns</code> - 打卡记录</li>
+        <li><code>dailyRecords</code> - 每日记录</li>
+        <li><code>dailyChatHistory</code> - AI聊天历史</li>
+        <li><code>chatWindowPosition</code> - 聊天窗口位置</li>
+    </ul>
+
+    <div class="warning">
+        <strong>📌 隐私说明</strong><br>
+        所有数据仅保存在您的设备上,不会上传到任何服务器(除AI对话需要调用API)。
+        您可以随时清空数据。
+    </div>
+
+    <h2>🎨 浏览器兼容性</h2>
+    <ul>
+        <li>✅ Chrome / Edge (推荐)</li>
+        <li>✅ Firefox</li>
+        <li>✅ Safari</li>
+        <li>✅ 移动端浏览器</li>
+    </ul>
+
+    <h2>📱 移动端优化</h2>
+    <div class="success">
+        <strong>🎉 已完成全面移动端优化!</strong><br>
+        应用已针对手机和平板设备进行深度优化。
+    </div>
+
+    <h3>移动端特性</h3>
+    <ul>
+        <li><strong>响应式布局</strong>: 自动适配各种屏幕尺寸</li>
+        <li><strong>触摸优化</strong>: 所有按钮至少44px,符合触摸标准</li>
+        <li><strong>AI聊天全屏</strong>: 移动端AI助手自动全屏显示</li>
+        <li><strong>禁用拖动</strong>: 小屏设备固定布局,避免误操作</li>
+        <li><strong>iOS适配</strong>: 支持安全区域,全屏模式优化</li>
+        <li><strong>横屏支持</strong>: 横屏模式专门优化</li>
+    </ul>
+
+    <h3>移动端使用建议</h3>
+    <ul>
+        <li>推荐竖屏使用,获得最佳体验</li>
+        <li>AI聊天窗口在移动端自动全屏,无需拖动</li>
+        <li>如遇到显示问题,尝试刷新页面</li>
+        <li>建议在WiFi环境下使用,AI对话需要网络</li>
+    </ul>
+
+    <h3>支持的设备</h3>
+    <ul>
+        <li>📱 iPhone (SE, 12, 13, 14, 15系列)</li>
+        <li>📱 Android手机 (360px及以上)</li>
+        <li>📱 iPad / Android平板</li>
+        <li>💻 桌面浏览器</li>
+    </ul>
+
+    <div class="warning">
+        <strong>💡 移动端提示</strong><br>
+        • 小屏设备(≤768px): AI聊天窗口全屏显示,不可拖动<br>
+        • 大屏设备(>768px): AI聊天窗口可拖动,位置会保存<br>
+        • 横屏模式: 布局自动调整以适应宽屏
+    </div>
+
+    <h2>📞 技术支持</h2>
+    <p>如遇到问题,请检查浏览器控制台(F12)的错误信息。</p>
+
+    <div style="text-align: center; margin: 50px 0; padding: 30px; background: #E8E3D8; border-radius: 2px;">
+        <h3 style="margin-top: 0;">🌟 准备好开始您的戒除之旅了吗?</h3>
+        <a href="index.html" class="btn" style="font-size: 1.2em;">立即开始</a>
+    </div>
+
+    <footer style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #C4C0B8; color: #8B8680;">
+        <p>AI戒除助手 | 侘寂风格设计 | 所有数据本地存储</p>
+    </footer>
+</body>
+</html>

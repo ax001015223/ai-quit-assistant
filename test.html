@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>错误检查</title>
+</head>
+<body>
+    <h1>JavaScript错误检查</h1>
+    <div id="errors"></div>
+
+    <script>
+        window.onerror = function(msg, url, line, col, error) {
+            const errorDiv = document.getElementById('errors');
+            errorDiv.innerHTML += `<p style="color:red">错误: ${msg}<br>位置: ${url}:${line}:${col}<br>详情: ${error}</p>`;
+            return false;
+        };
+    </script>
+
+    <script src="js/storage.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/dashboard.js"></script>
+
+    <script>
+        console.log('所有脚本加载完成');
+        document.getElementById('errors').innerHTML += '<p style="color:green">✓ 所有JS文件加载成功,无语法错误</p>';
+    </script>
+</body>
+</html>

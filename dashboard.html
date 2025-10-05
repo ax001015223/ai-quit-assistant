@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
+    <title>AI戒除助手 - 我的计划</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-page">
+    <div class="container">
+        <header class="dashboard-header">
+            <h1>🌟 我的戒除之旅</h1>
+            <div class="streak-counter">
+                <div class="streak-number" id="streakDays">0</div>
+                <div class="streak-label">连续天数</div>
+            </div>
+        </header>
+
+        <!-- 标签导航 -->
+        <nav class="tabs">
+            <button class="tab active" data-tab="plan">戒除计划</button>
+            <button class="tab" data-tab="record">记录分析</button>
+            <button class="tab" data-tab="checkin">打卡</button>
+        </nav>
+
+        <!-- 戒除计划标签 -->
+        <div class="tab-content active" id="planTab">
+            <section class="card">
+                <h2>📋 我的计划</h2>
+                <div id="planSummary" class="plan-summary"></div>
+                <div id="planPhases" class="plan-phases"></div>
+            </section>
+
+            <section class="card">
+                <h3>💡 应对戒断反应</h3>
+                <ul id="withdrawalTips" class="tips-list"></ul>
+            </section>
+
+            <section class="card">
+                <h3>🛡️ 触发场景应对</h3>
+                <ul id="triggerStrategies" class="tips-list"></ul>
+            </section>
+        </div>
+
+        <!-- 记录分析标签 -->
+        <div class="tab-content" id="recordTab">
+            <section class="card">
+                <h2>📊 数据分析</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalDays">0</div>
+                        <div class="stat-label">总天数</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgMood">-</div>
+                        <div class="stat-label">平均情绪</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="bestStreak">0</div>
+                        <div class="stat-label">最长连续</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="moodChart" width="700" height="250"></canvas>
+                </div>
+            </section>
+
+            <section class="card">
+                <h3>📝 今日记录</h3>
+                <form id="recordForm">
+                    <div class="form-group">
+                        <label>今日情绪 (1-10分)</label>
+                        <input type="range" id="moodSlider" min="1" max="10" value="5">
+                        <span id="moodValue">5</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>戒断反应</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="withdrawal" value="焦虑"> 焦虑</label>
+                            <label><input type="checkbox" name="withdrawal" value="失眠"> 失眠</label>
+                            <label><input type="checkbox" name="withdrawal" value="易怒"> 易怒</label>
+                            <label><input type="checkbox" name="withdrawal" value="疲劳"> 疲劳</label>
+                            <label><input type="checkbox" name="withdrawal" value="强烈欲望"> 强烈欲望</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>今日感受</label>
+                        <textarea id="dailyNote" rows="3" placeholder="记录今天的感受、挑战或收获..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">保存记录</button>
+                </form>
+            </section>
+
+            <section class="card">
+                <h3>📅 历史记录</h3>
+                <div id="recordHistory" class="record-history"></div>
+            </section>
+        </div>
+
+        <!-- 打卡标签 -->
+        <div class="tab-content" id="checkinTab">
+            <section class="card checkin-section">
+                <h2>✅ 每日打卡</h2>
+
+                <div class="checkin-status" id="checkinStatus">
+                    <div class="checkin-circle" id="checkinCircle">
+                        <span class="checkin-icon">📅</span>
+                    </div>
+                    <p class="checkin-text" id="checkinText">点击打卡</p>
+                </div>
+
+                <button id="checkinBtn" class="btn btn-primary btn-large">
+                    今日打卡
+                </button>
+
+                <div class="milestones">
+                    <h3>🏆 里程碑</h3>
+                    <div class="milestone-list">
+                        <div class="milestone" data-days="1">
+                            <span class="milestone-badge">🌱</span>
+                            <span class="milestone-name">第1天</span>
+                        </div>
+                        <div class="milestone" data-days="7">
+                            <span class="milestone-badge">🌿</span>
+                            <span class="milestone-name">第7天</span>
+                        </div>
+                        <div class="milestone" data-days="30">
+                            <span class="milestone-badge">🌳</span>
+                            <span class="milestone-name">第30天</span>
+                        </div>
+                        <div class="milestone" data-days="90">
+                            <span class="milestone-badge">🏔️</span>
+                            <span class="milestone-name">第90天</span>
+                        </div>
+                        <div class="milestone" data-days="365">
+                            <span class="milestone-badge">👑</span>
+                            <span class="milestone-name">第365天</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calendar" id="calendar"></div>
+            </section>
+        </div>
+    </div>
+
+    <!-- AI助手浮动按钮 -->
+    <button type="button" class="ai-chat-btn" id="aiChatBtn">💬</button>
+
+    <!-- AI聊天窗口 -->
+    <div class="ai-chat-window" id="aiChatWindow">
+        <div class="chat-header">
+            <h3>🤖 AI助手</h3>
+            <div class="chat-header-actions">
+                <button type="button" class="header-icon-btn" id="clearChatBtn" data-tooltip="清空聊天记录" title="清空聊天记录">🗑️</button>
+                <button type="button" class="close-btn" id="closeChatBtn">×</button>
+            </div>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="有什么想聊的吗...">
+            <button type="button" id="sendChatBtn" class="btn btn-primary">发送</button>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

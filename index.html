@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
+    <title>AI戒除助手 - 初始评估</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="assessment-page">
+    <div class="container">
+        <header class="header">
+            <h1>🌱 AI戒除助手</h1>
+            <p class="subtitle">让我了解您的情况,为您定制专属计划</p>
+        </header>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="message ai-message">
+                <div class="message-content">
+                    <p>您好!我是您的戒除辅导助手。</p>
+                    <p>我会通过几个问题了解您的情况,然后为您制定个性化的戒除计划。这个过程完全保密,所有信息只保存在您的设备上。</p>
+                    <p>请问,您想要戒除什么成瘾行为呢?(例如:手淫、吸烟、饮酒、游戏等)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-area">
+            <textarea id="userInput" placeholder="输入您的回答..." rows="3"></textarea>
+            <button id="sendBtn" class="btn btn-primary">
+                <span id="btnText">发送</span>
+                <span id="btnLoader" class="loader" style="display:none;"></span>
+            </button>
+        </div>
+
+        <div class="progress-indicator">
+            <div class="progress-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <p class="progress-text">评估进度: 1/5</p>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/assessment.js"></script>
+</body>
+</html>
